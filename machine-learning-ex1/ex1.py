@@ -33,18 +33,40 @@ sys.path.append('..')
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import warmUpExercise
+from warmUpExercise import warmUpExercise
+from plotData import plotData
 ## ==================== Part 1: Basic Function ====================
 # Complete warmUpExercise.py
 print "Running warmUpExercise ...\n"
 print "5x5 Identity Matrix:\n"
-A = warmUpExercise.warmUpExercise()
+A = warmUpExercise()
 print "A=\n",A
 print "Program paused. Press enter to continue.\n"
 raw_input()
 
 ## ======================= Part 2: Plotting =======================
 print "Plotting Data ...\n"
-data = pd.read_csv('ex1data1.txt',header=None)
-print data.columns
+data = pd.read_csv('ex1data1.txt',names=['Population','Profit'])
+X = data.values[:,0]
+y = data.vales[:,1]
+m = len(y) #number of training examples
+
+# Plot Data
+# Note:You have to complete the code in plotData.py
+plotData(X,y)
+print "Program paused. Press enter to continue.\n"
+raw_input()
+
+## =================== Part 3: Gradient descent ===================
+print 'Running Gradient Descent ...\n'
+
+X = np.c_[np.ones(m),X] #Add a column of ones to x
+theta = np.zeros((2,1)) # initialize fitting parameters
+
+# Some gradient descent settings
+iterations = 1500
+alpha = 0.01
+
+# compute and display initial cost
+computeCost(X,y,theta)
 
