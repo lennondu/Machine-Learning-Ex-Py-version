@@ -35,6 +35,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from warmUpExercise import warmUpExercise
 from plotData import plotData
+from computeCost import computeCost
+from gradientDescent import gradientDescent
 ## ==================== Part 1: Basic Function ====================
 # Complete warmUpExercise.py
 print "Running warmUpExercise ...\n"
@@ -69,4 +71,15 @@ alpha = 0.01
 
 # compute and display initial cost
 computeCost(X,y,theta)
+
+# run gradient descent
+theta = gradientDescent(X,y,theta,alpha,iterations)
+
+# print theta to screen
+print "Theta found by gradient descent:"
+print "%f %f" % (theta[0],theta[1])
+
+# Plot the linear fit
+plt.plot(X[:,1],np.dot(X,theta),'-')
+plt.legend("Traiing data","Linear regression")
 
