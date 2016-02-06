@@ -3,8 +3,18 @@
 
 import numpy as np
 def computeCost(X, y, theta):
+    #COMPUTECOST Compute cost for linear regression
+    # J = COMPUTECOST(X, y, theta) computes the cost of using theta as the
+    # parameter for linear regression to fit the data points in X and y
 
-    m = len(y)
-    J = sum((y - np.dot(X,theta))**2)/(2*m)
+    # Initialize some useful values
+    m = y.shape[0] # number of training examples
+
+    # You need to return the following variables correctly
+    # J = 0
+
+    # Instructions: Compute the cost of a particular choice of theta
+    #   You should set J to the COMPUTECOST
+    J = ((y.values - np.dot(X,theta).reshape(m,1))**2).sum()/(2*m)
     return J
 

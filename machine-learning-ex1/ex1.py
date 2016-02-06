@@ -27,9 +27,6 @@
 #
 
 ## import package
-import sys
-## add the current path to the import path
-sys.path.append('..')
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -49,9 +46,10 @@ raw_input()
 ## ======================= Part 2: Plotting =======================
 print "Plotting Data ...\n"
 data = pd.read_csv('ex1data1.txt',names=['Population','Profit'])
-X = data.values[:,0]
-y = data.vales[:,1]
-m = len(y) #number of training examples
+X = pd.DataFrame(data['Population'],columns=['Population'])
+y = pd.DataFrame(data['Profit'],columns=['Profit'])
+
+m = y.shape[0] #number of training examples
 
 # Plot Data
 # Note:You have to complete the code in plotData.py
@@ -62,7 +60,7 @@ raw_input()
 ## =================== Part 3: Gradient descent ===================
 print 'Running Gradient Descent ...\n'
 
-X = np.c_[np.ones(m),X] #Add a column of ones to x
+X['Residual']=np.ones(m) #Add a column of ones to x
 theta = np.zeros((2,1)) # initialize fitting parameters
 
 # Some gradient descent settings
@@ -70,16 +68,19 @@ iterations = 1500
 alpha = 0.01
 
 # compute and display initial cost
-computeCost(X,y,theta)
+print 'J = ',computeCost(X,y,theta)
 
 # run gradient descent
-theta = gradientDescent(X,y,theta,alpha,iterations)
+theta,J_his = gradientDescent(X,y,theta,alpha,iterations)
 
 # print theta to screen
 print "Theta found by gradient descent:"
 print "%f %f" % (theta[0],theta[1])
 
 # Plot the linear fit
-plt.plot(X[:,1],np.dot(X,theta),'-')
-plt.legend("Traiing data","Linear regression")
+plt.figure(2)
+plt.plot(X['Population'],np.dot(X,theta),'-')
+plt.legend(handles=["Traiing data","Linear regression"])
+
+# Predict values for population sizes of 35,000 and 70,000
 
